@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a130032e.css",
+    "main.js": "/static/js/main.e6ddcffd.js",
+    "static/media/home-vinted.jpeg": "/static/media/home-vinted.8bb1c2ce96f1be1454fd.jpeg",
+    "static/media/logo.svg": "/static/media/logo.3ec501e0dd585a4470805f6946bdcaf0.svg",
+    "index.html": "/index.html",
+    "main.a130032e.css.map": "/static/css/main.a130032e.css.map",
+    "main.e6ddcffd.js.map": "/static/js/main.e6ddcffd.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a130032e.css",
+    "static/js/main.e6ddcffd.js"
+  ]
+}
