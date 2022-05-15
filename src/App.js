@@ -14,6 +14,8 @@ import Header from "./components/Header";
 
 function App() {
   const [userToken, setUserToken] = useState(Cookies.get("userToken") || null); //cette expression renvoie la valeur du cookie s'il existe
+  const [search, setSearch] = useState("");
+  const [sortPrice, setSortPrice] = useState(false);
 
   const handleToken = (token) => {
     if (token) {
@@ -27,9 +29,18 @@ function App() {
 
   return (
     <Router>
-      <Header handleToken={handleToken} userToken={userToken} />
+      <Header
+        handleToken={handleToken}
+        userToken={userToken}
+        setSearch={setSearch}
+        sortPrice={sortPrice}
+        setSortPrice={setSortPrice}
+      />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={<Home search={search} sortPrice={sortPrice} />}
+        />
         <Route path="/offer/:id" element={<Offer />} />
         <Route path="/signup" element={<Signup handleToken={handleToken} />} />
         <Route path="/login" element={<Login handleToken={handleToken} />} />
