@@ -3,18 +3,24 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 import homeVinted from "../images/home-vinted.jpeg";
+import tear from "../images/tear.svg";
 
-const Home = ({ search, sortPrice }) => {
+import PriceRange from "../components/PriceRange";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+const Home = ({ search, sortPrice, setSortPrice }) => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-
+  const [fetchRangeValues, setFetchRangeValues] = useState([0, 10000]);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
     const fecthData = async () => {
       try {
         const response = await axios.get(
-          `https://lereacteur-vinted-api.herokuapp.com/offers?limit=8&page=${page}&title=${search}&sort=${
+          `https://lereacteur-vinted-api.herokuapp.com/offers?limit=12&page=${page}&priceMin=${
+            fetchRangeValues[0]
+          }&priceMax=${fetchRangeValues[1]}&title=${search}&sort=${
             sortPrice ? "price-desc" : "price-asc"
           }`
         );
@@ -26,16 +32,43 @@ const Home = ({ search, sortPrice }) => {
       }
     };
     fecthData();
-  }, [page, search]);
+  }, [page, search, sortPrice, fetchRangeValues]);
 
   return isLoading ? (
     <p>Loading ...</p>
   ) : (
     <div className="home">
-      <img src={homeVinted} alt="dressing" className="dressingPicture" />
-      <button onClick={() => setPage(page - 1)}> - </button>
-      <p>{page}</p>
-      <button onClick={() => setPage(page + 1)}> + </button>
+      <div className="hero-home">
+        <div className="ready-to-sale">
+          <h2 className="ready-to-sale-h2">
+            Prêts à faire du tri dans vos placards ?
+          </h2>
+          <Link to={"/publish"}>
+            <button className="selling-button">Commencer à vendre</button>
+          </Link>
+        </div>
+        <img src={tear} alt="tear" className="tear" />
+        <img src={homeVinted} alt="dressing" className="dressingPicture" />
+      </div>
+      <div className="filter-price">
+        <div className="sort-price">
+          <p>Prix {sortPrice ? "décroissants" : "croissants"}</p>
+          <input
+            type="checkbox"
+            checked={sortPrice}
+            onClick={() => {
+              setSortPrice(!sortPrice);
+            }}
+            defaultChecked={false}
+          ></input>
+        </div>
+        <div className="price-range">
+          <p>Prix entre : </p>
+          <PriceRange setFetchRangeValues={setFetchRangeValues} />
+        </div>
+      </div>
+
+      <h2 className="home-h2">Articles en vente</h2>
       <div className="list-of-offers">
         {data.offers.map((offer, index) => {
           return (
@@ -44,12 +77,30 @@ const Home = ({ search, sortPrice }) => {
               key={offer._id}
               to={`/offer/${offer._id}`}
             >
-              <p>{offer.product_name}</p>
               <img src={offer.product_image.secure_url} alt="clothes" />
-              <p>Prix : {offer.product_price} €</p>
+              <p className="price">{offer.product_price.toFixed(2)} €</p>
+              <p className="name">{offer.product_name}</p>
             </Link>
           );
         })}
+      </div>
+      <div className="setpage">
+        <FontAwesomeIcon
+          className="arrows"
+          icon="angle-left"
+          onClick={() => setPage(page - 1)}
+        />
+        <p className="current-page">{page}</p>
+        {/* <p onClick={() => setPage(page + 1)}>{page + 1} </p>
+        <p onClick={() => setPage(page + 2)}>{page + 2}</p> */}
+        <FontAwesomeIcon
+          className="arrows"
+          icon="angle-right"
+          onClick={() => setPage(page + 1)}
+        />
+        {/* <button onClick={() => setPage(page - 1)}> - </button>
+        <p>{page}</p>
+        <button onClick={() => setPage(page + 1)}> + </button> */}
       </div>
     </div>
   );
