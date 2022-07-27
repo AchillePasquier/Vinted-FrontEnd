@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Publish = ({ userToken }) => {
   const [picture, setPicture] = useState();
@@ -42,88 +43,110 @@ const Publish = ({ userToken }) => {
   };
 
   return userToken ? (
-    <div className="signup-container">
-      {!picture ? (
-        <div className="file-container">
-          <label htmlFor="file">Ajouter une photo</label>
-          <input
-            id="file"
-            // value={picture}
-            type="file"
-            onChange={(event) => {
-              //console.log(event.target.files[0].name);
-              setPicture(event.target.files[0]);
-            }}
-          />
-        </div>
-      ) : (
-        <img src={URL.createObjectURL(picture)} alt="" />
-      )}
+    <div className="log-sign-page">
+      <div className="selling-container">
+        <h1 className="log-sign-h1">Publier une annonce</h1>
+        {!picture ? (
+          <div className="file-container">
+            <label for="file" class="label-file">
+              Ajoute une photo{" "}
+            </label>
+            <FontAwesomeIcon className="add-image-icon" icon="plus" />
 
-      <input
-        value={title}
-        type="text"
-        placeholder="Titre"
-        onChange={(event) => {
-          setTitle(event.target.value);
-        }}
-      />
-      <textarea
-        value={description}
-        placeholder="Description"
-        onChange={(event) => {
-          setDescription(event.target.value);
-        }}
-      ></textarea>
-      <input
-        value={brand}
-        type="text"
-        placeholder="Marque"
-        onChange={(event) => {
-          setBrand(event.target.value);
-        }}
-      />
-      <input
-        value={size}
-        type="text"
-        placeholder="Taille"
-        onChange={(event) => {
-          setSize(event.target.value);
-        }}
-      />
-      <input
-        value={color}
-        type="text"
-        placeholder="Couleur"
-        onChange={(event) => {
-          setColor(event.target.value);
-        }}
-      />
-      <input
-        value={state}
-        type="text"
-        placeholder="État"
-        onChange={(event) => {
-          setState(event.target.value);
-        }}
-      />
-      <input
-        value={location}
-        type="text"
-        placeholder="Lieu"
-        onChange={(event) => {
-          setLocation(event.target.value);
-        }}
-      />
-      <input
-        value={price}
-        type="number"
-        placeholder="Prix"
-        onChange={(event) => {
-          setPrice(event.target.value);
-        }}
-      />
-      <button onClick={handleSubmit}>Publier</button>
+            <input
+              id="file"
+              // value={picture}
+              type="file"
+              onChange={(event) => {
+                //console.log(event.target.files[0].name);
+                setPicture(event.target.files[0]);
+              }}
+            />
+          </div>
+        ) : (
+          <img
+            className="img-product"
+            src={URL.createObjectURL(picture)}
+            alt=""
+          />
+        )}
+
+        <input
+          className="form-input"
+          value={title}
+          type="text"
+          placeholder="Titre"
+          onChange={(event) => {
+            setTitle(event.target.value);
+          }}
+        />
+        <textarea
+          className="form-input"
+          value={description}
+          placeholder="Description"
+          onChange={(event) => {
+            setDescription(event.target.value);
+          }}
+        ></textarea>
+        <input
+          className="form-input"
+          value={brand}
+          type="text"
+          placeholder="Marque"
+          onChange={(event) => {
+            setBrand(event.target.value);
+          }}
+        />
+        <input
+          className="form-input"
+          value={size}
+          type="text"
+          placeholder="Taille"
+          onChange={(event) => {
+            setSize(event.target.value);
+          }}
+        />
+        <input
+          className="form-input"
+          value={color}
+          type="text"
+          placeholder="Couleur"
+          onChange={(event) => {
+            setColor(event.target.value);
+          }}
+        />
+        <input
+          className="form-input"
+          value={state}
+          type="text"
+          placeholder="État"
+          onChange={(event) => {
+            setState(event.target.value);
+          }}
+        />
+        <input
+          className="form-input"
+          value={location}
+          type="text"
+          placeholder="Lieu"
+          onChange={(event) => {
+            setLocation(event.target.value);
+          }}
+        />
+        <p className="selling-price">Prix</p>
+        <input
+          className="form-input"
+          value={price}
+          type="number"
+          placeholder="Prix"
+          onChange={(event) => {
+            setPrice(event.target.value);
+          }}
+        />
+        <button className="submit-input" onClick={handleSubmit}>
+          Publier
+        </button>
+      </div>
     </div>
   ) : (
     <Navigate to="/login" />

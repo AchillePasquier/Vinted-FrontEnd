@@ -10,6 +10,7 @@ import Offer from "./pages/Offer";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Publish from "./pages/Publish";
+import Payment from "./pages/Payment";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -22,6 +23,7 @@ import {
   faAngleLeft,
   faAngleRight,
   faArrowLeft,
+  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faMagnifyingGlass,
@@ -29,7 +31,8 @@ library.add(
   faXmark,
   faAngleLeft,
   faAngleRight,
-  faArrowLeft
+  faArrowLeft,
+  faPlus
 );
 
 function App() {
@@ -69,6 +72,7 @@ function App() {
         <Route path="/signup" element={<Signup handleToken={handleToken} />} />
         <Route path="/login" element={<Login handleToken={handleToken} />} />
         <Route path="/publish" element={<Publish userToken={userToken} />} />
+        <Route path="/payment" element={<Payment />} />
       </Routes>
       <Footer />
     </Router>

@@ -12,7 +12,7 @@ const Header = ({ handleToken, userToken, setSearch }) => {
         <Link to={"/"}>
           <img src={LogoVinted} alt="Logo-Vinted" />
         </Link>
-        <div className="buttons">
+        <div className={clicked ? "buttons active" : "buttons"}>
           <div className="search-bar">
             <FontAwesomeIcon className="search-icon" icon="magnifying-glass" />
             <input
@@ -34,7 +34,7 @@ const Header = ({ handleToken, userToken, setSearch }) => {
               </Link>
             </div>
           ) : (
-            <Link to={"/"}>
+            <Link className="selling-link" to={"/"}>
               <button
                 className="log-sign-but"
                 onClick={() => {
@@ -45,7 +45,7 @@ const Header = ({ handleToken, userToken, setSearch }) => {
               </button>
             </Link>
           )}
-          <Link to={"/publish"}>
+          <Link className="selling-link" to={"/publish"}>
             <button
               className="selling-button"
               // onClick={() => {

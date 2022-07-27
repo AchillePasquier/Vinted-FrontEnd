@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Signup = ({ handleToken }) => {
   const [username, setUsername] = useState("");
@@ -31,41 +31,53 @@ const Signup = ({ handleToken }) => {
   };
 
   return (
-    <form className="signup-container" onSubmit={handleSubmit}>
-      <h1>S'inscrire</h1>
-      <input
-        type="text"
-        placeholder="Name"
-        value={username}
-        onChange={(event) => {
-          setUsername(event.target.value);
-        }}
-      />
-      <input
-        type="text"
-        placeholder="Email"
-        value={email}
-        onChange={(event) => {
-          setEmail(event.target.value);
-        }}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(event) => {
-          setPassword(event.target.value);
-        }}
-      />
-      <input
-        type="checkbox"
-        checked={newsLetter}
-        onChange={() => {
-          setNewsLetter(!newsLetter);
-        }}
-      />
-      <input type="submit" value="S'inscrire" />
-    </form>
+    <div className="log-sign-page">
+      <form className="signup-container" onSubmit={handleSubmit}>
+        <h1 className="log-sign-h1">S'inscrire</h1>
+        <input
+          className="form-input"
+          type="text"
+          placeholder="Name"
+          value={username}
+          onChange={(event) => {
+            setUsername(event.target.value);
+          }}
+        />
+        <input
+          className="form-input"
+          type="text"
+          placeholder="Email"
+          value={email}
+          onChange={(event) => {
+            setEmail(event.target.value);
+          }}
+        />
+        <input
+          className="form-input"
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(event) => {
+            setPassword(event.target.value);
+          }}
+        />
+        <div className="newsletter">
+          <input
+            type="checkbox"
+            checked={newsLetter}
+            onChange={() => {
+              setNewsLetter(!newsLetter);
+            }}
+          />
+          <p>S'inscrire à notre newsletter</p>
+        </div>
+
+        <input className="submit-input" type="submit" value="S'inscrire" />
+        <Link to={"/login"}>
+          <p className="other">Tu as déja un compte ? Connecte-toi !</p>
+        </Link>
+      </form>
+    </div>
   );
 };
 

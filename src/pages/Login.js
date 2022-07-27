@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Login = ({ handleToken }) => {
   const [email, setEmail] = useState("");
@@ -27,22 +27,29 @@ const Login = ({ handleToken }) => {
   };
 
   return (
-    <form className="signup-container" onSubmit={handleSubmit}>
-      <h1>Se connecter</h1>
-      <input
-        type="text"
-        placeholder="email"
-        value={email}
-        onChange={(event) => setEmail(event.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="password"
-        value={password}
-        onChange={(event) => setPassword(event.target.value)}
-      />
-      <input type="submit" value="Connexion" />
-    </form>
+    <div className="log-sign-page">
+      <form className="signup-container" onSubmit={handleSubmit}>
+        <h1 className="log-sign-h1">Se connecter</h1>
+        <input
+          className="form-input"
+          type="text"
+          placeholder="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+        />
+        <input
+          className="form-input"
+          type="password"
+          placeholder="password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+        />
+        <input className="submit-input" type="submit" value="Connexion" />
+        <Link to={"/signup"}>
+          <p className="other">Pas encore de compte ? Inscris-toi !</p>
+        </Link>
+      </form>
+    </div>
   );
 };
 

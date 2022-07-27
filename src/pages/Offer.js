@@ -31,7 +31,10 @@ const Offer = () => {
   }, [id]);
 
   return isLoading ? (
-    <p>Loading ...</p>
+    <>
+      <div className="loader"></div>
+      <h1 className="chargement">Chargement</h1>
+    </>
   ) : (
     <div className="offer-page">
       <Link to={"/"}>
@@ -42,20 +45,26 @@ const Offer = () => {
       </Link>
       <div className="offer">
         <img src={data.product_image.secure_url} alt="clothe" />
-        <div className="offer-description">
-          <h2>{data.product_name}</h2>
-          <p>Prix : {data.product_price} €</p>
-          {data.product_details.map((detail, index) => {
-            //product_details est un tableau d'objet avec dans chaque objet soit la marque et sa valeur, soit la couleur et sa valeur etc.
-            const keyName = Object.keys(detail); // Object.keys() renvoie le nom des clés de l'objet sous forme de tableau (ici on a qu'une clé par objet)
-            //console.log(keyName[0]); //affiche juste le nom de la clé
-            return (
-              <div key={index} className="product-details">
-                <span>{keyName[0]} : </span>
-                <span>{detail[keyName[0]]}</span>
-              </div>
-            );
-          })}
+        <div className="offer-right">
+          <div className="offer-description">
+            <h2>{data.product_name}</h2>
+            <p>Prix : {data.product_price} €</p>
+            {data.product_details.map((detail, index) => {
+              //product_details est un tableau d'objet avec dans chaque objet soit la marque et sa valeur, soit la couleur et sa valeur etc.
+              const keyName = Object.keys(detail); // Object.keys() renvoie le nom des clés de l'objet sous forme de tableau (ici on a qu'une clé par objet)
+              //console.log(keyName[0]); //affiche juste le nom de la clé
+              return (
+                <div key={index} className="product-details">
+                  <span className="key">{keyName[0]} : </span>
+                  <span className="value">{detail[keyName[0]]}</span>
+                </div>
+              );
+            })}
+          </div>
+
+          <Link to="/payment" state={{ data: data }}>
+            <button className="selling-button">Acheter</button>
+          </Link>
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@ const MIN = 0;
 const MAX = 500;
 
 const PriceRange = ({ setFetchRangeValues }) => {
-  const [rangeValues, setRangeValues] = useState([10, 100]);
+  const [rangeValues, setRangeValues] = useState([0, 500]);
 
   return (
     <Range

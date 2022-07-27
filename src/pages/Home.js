@@ -35,7 +35,10 @@ const Home = ({ search, sortPrice, setSortPrice }) => {
   }, [page, search, sortPrice, fetchRangeValues]);
 
   return isLoading ? (
-    <p>Loading ...</p>
+    <>
+      <div className="loader"></div>
+      <h1 className="chargement">Chargement</h1>
+    </>
   ) : (
     <div className="home">
       <div className="hero-home">
@@ -52,6 +55,29 @@ const Home = ({ search, sortPrice, setSortPrice }) => {
       </div>
       <div className="filter-price">
         <div className="sort-price">
+          {" "}
+          <p>Trier par prix :</p>
+          <span className="checkbox">
+            <input
+              type="checkbox"
+              checked={sortPrice}
+              onChange={() => {}}
+              name="price"
+            />
+            <div
+              className="wrapper"
+              onClick={() => {
+                setSortPrice(!sortPrice);
+              }}
+            >
+              <div className="knob">
+                <span>{sortPrice ? "⇣" : "⇡"}</span>
+              </div>
+            </div>
+          </span>
+        </div>
+
+        {/* <div className="sort-price">
           <p>Prix {sortPrice ? "décroissants" : "croissants"}</p>
           <input
             type="checkbox"
@@ -61,7 +87,7 @@ const Home = ({ search, sortPrice, setSortPrice }) => {
             }}
             defaultChecked={false}
           ></input>
-        </div>
+        </div> */}
         <div className="price-range">
           <p>Prix entre : </p>
           <PriceRange setFetchRangeValues={setFetchRangeValues} />
@@ -88,7 +114,11 @@ const Home = ({ search, sortPrice, setSortPrice }) => {
         <FontAwesomeIcon
           className="arrows"
           icon="angle-left"
-          onClick={() => setPage(page - 1)}
+          onClick={() => {
+            if (page > 1) {
+              setPage(page - 1);
+            }
+          }}
         />
         <p className="current-page">{page}</p>
         {/* <p onClick={() => setPage(page + 1)}>{page + 1} </p>
