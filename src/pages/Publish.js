@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,6 +14,8 @@ const Publish = ({ userToken }) => {
   const [location, setLocation] = useState("");
   const [price, setPrice] = useState(0);
 
+  const navigate = useNavigate();
+
   const handleSubmit = async () => {
     try {
       const formData = new FormData();
@@ -28,7 +30,7 @@ const Publish = ({ userToken }) => {
       formData.append("picture", picture);
 
       const response = await axios.post(
-        "https://lereacteur-vinted-api.herokuapp.com/offer/publish",
+        "https://backend-vinted-achille.herokuapp.com/offer/publish",
         formData,
         {
           headers: {
@@ -37,6 +39,8 @@ const Publish = ({ userToken }) => {
         }
       );
       console.log(response.data);
+      alert("Votre annonce a été publiée 😉");
+      navigate("/");
     } catch (error) {
       console.log(error.response.data);
     }

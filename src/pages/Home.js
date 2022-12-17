@@ -18,13 +18,13 @@ const Home = ({ search, sortPrice, setSortPrice }) => {
     const fecthData = async () => {
       try {
         const response = await axios.get(
-          `https://lereacteur-vinted-api.herokuapp.com/offers?limit=12&page=${page}&priceMin=${
+          `https://backend-vinted-achille.herokuapp.com/offers?limit=12&page=${page}&priceMin=${
             fetchRangeValues[0]
           }&priceMax=${fetchRangeValues[1]}&title=${search}&sort=${
             sortPrice ? "price-desc" : "price-asc"
           }`
         );
-        //console.log(response.data);
+        // console.log(response.data);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {

@@ -14,7 +14,7 @@ const Signup = ({ handleToken }) => {
     event.preventDefault(); //pour éviter de rafraichir la page lors de la soumission du formulaire
     try {
       const response = await axios.post(
-        "https://lereacteur-vinted-api.herokuapp.com/user/signup",
+        "https://backend-vinted-achille.herokuapp.com/user/signup",
         {
           username: username, // on aaurait pu écrire juste username car la clé et sa valeur ont le même nom
           email: email,
